@@ -1,42 +1,23 @@
 'use client'
 
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-const PASSWORDS: Record<string, string> = {
-  china: 'RedLine2024',
-  usa: 'Minerals4200',
-  valdoria: 'OptionB2024',
-}
-
 export default function LoginPage() {
-  const searchParams = useSearchParams()
   const router = useRouter()
-  const delegation = searchParams.get('delegation') || 'china'
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
-  const delegationNames: Record<string, string> = {
-    china: "People's Republic of China",
-    usa: 'United States of America',
-    valdoria: 'Republic of Valdoria',
-  }
-
-  const delegationColors: Record<string, { border: string; text: string; bg: string }> = {
-    china: { border: '#c8102e', text: '#c8102e', bg: 'rgba(200, 16, 46, 0.05)' },
-    usa: { border: '#c9a84c', text: '#c9a84c', bg: 'rgba(201, 168, 76, 0.05)' },
-    valdoria: { border: '#2d6a2d', text: '#2d6a2d', bg: 'rgba(45, 106, 45, 0.05)' },
-  }
-
-  const colors = delegationColors[delegation] || delegationColors.china
+  const delegation = 'valdoria'
+  const correctPassword = 'OptionB2024'
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
     setIsLoading(true)
 
-    if (password === PASSWORDS[delegation as keyof typeof PASSWORDS]) {
+    if (password === correctPassword) {
       const token = `${delegation}:${Date.now()}`
       document.cookie = `auth_token=${token}; path=/; max-age=86400`
       router.push(`/${delegation}`)
@@ -50,8 +31,8 @@ export default function LoginPage() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: '#f5f0e8',
-      fontFamily: "'IBM Plex Mono', monospace",
+      background: '#f2f4ee',
+      fontFamily: "'JetBrains Mono', monospace",
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -61,34 +42,34 @@ export default function LoginPage() {
         width: '100%',
         maxWidth: '420px',
         background: '#fff',
-        border: `2px solid ${colors.border}`,
+        border: '2px solid #2d6a2d',
         padding: '40px 32px',
       }}>
         <div style={{
           fontSize: '12px',
           letterSpacing: '0.2em',
           textTransform: 'uppercase',
-          color: colors.text,
+          color: '#2d6a2d',
           marginBottom: '8px',
           fontWeight: 600,
         }}>
-          CLASSIFIED · DELEGATION EYES ONLY
+          CONFIDENTIAL · EYES ONLY
         </div>
 
         <h1 style={{
           fontSize: '20px',
           fontWeight: 700,
           letterSpacing: '0.01em',
-          color: '#0e0d0c',
+          color: '#1a2010',
           marginBottom: '8px',
           marginTop: '20px',
         }}>
-          {delegationNames[delegation as keyof typeof delegationNames]}
+          Republic of Valdoria
         </h1>
 
         <p style={{
           fontSize: '12px',
-          color: '#7a6f62',
+          color: '#6a7a5a',
           marginBottom: '30px',
           lineHeight: 1.6,
         }}>
@@ -102,7 +83,7 @@ export default function LoginPage() {
               fontSize: '10px',
               letterSpacing: '0.12em',
               textTransform: 'uppercase',
-              color: '#7a6f62',
+              color: '#6a7a5a',
               marginBottom: '8px',
               fontWeight: 600,
             }}>
@@ -117,9 +98,9 @@ export default function LoginPage() {
                 width: '100%',
                 padding: '12px 16px',
                 fontSize: '14px',
-                border: `1px solid ${error ? '#c8102e' : '#ccc4b0'}`,
-                background: error ? 'rgba(200, 16, 46, 0.05)' : '#f5f0e8',
-                color: '#0e0d0c',
+                border: `1px solid ${error ? '#2d6a2d' : '#c8d0b8'}`,
+                background: error ? 'rgba(45, 106, 45, 0.05)' : '#f2f4ee',
+                color: '#1a2010',
                 fontFamily: 'inherit',
                 boxSizing: 'border-box',
               }}
@@ -130,9 +111,9 @@ export default function LoginPage() {
 
           {error && (
             <div style={{
-              background: 'rgba(200, 16, 46, 0.1)',
-              border: '1px solid #c8102e',
-              color: '#c8102e',
+              background: 'rgba(45, 106, 45, 0.1)',
+              border: '1px solid #2d6a2d',
+              color: '#2d6a2d',
               padding: '12px 14px',
               fontSize: '12px',
               marginBottom: '20px',
@@ -148,7 +129,7 @@ export default function LoginPage() {
             style={{
               width: '100%',
               padding: '12px 16px',
-              background: isLoading ? '#ccc4b0' : colors.border,
+              background: isLoading ? '#c8d0b8' : '#2d6a2d',
               color: '#fff',
               border: 'none',
               fontSize: '11px',
@@ -165,7 +146,7 @@ export default function LoginPage() {
 
         <div style={{
           fontSize: '9px',
-          color: '#7a6f62',
+          color: '#6a7a5a',
           marginTop: '20px',
           textAlign: 'center',
           letterSpacing: '0.08em',
