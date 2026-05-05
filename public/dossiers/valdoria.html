@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Valdoria Delegation Dossier · Fennland Forum 2024</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --green:      #2d6a2d;
+    --green-mid:  #1f4f1f;
+    --green-dim:  #163416;
+    --yellow:     #d4b800;
+    --cream:      #f2f4ee;
+    --muted:      #6a7a5a;
+    --ink:        #1a2010;
+    --border:     #c8d0b8;
+    --red-warn:   #c0392b;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  header {
+    background: var(--green-dim);
+    color: #f5f5f0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-flag-bar {
+    display: flex;
+    height: 5px;
+  }
+
+  .flag-green { flex: 1; background: var(--green); }
+  .flag-yellow { flex: 1; background: var(--yellow); }
+  .flag-white { flex: 1; background: #f5f5f0; }
+
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-left { display: flex; align-items: center; gap: 14px; }
+
+  .header-title {
+    font-family: 'Crimson Pro', serif;
+    font-size: 19px;
+    font-weight: 700;
+  }
+
+  .header-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #8aaa6a;
+    letter-spacing: 0.14em;
+    margin-top: 3px;
+  }
+
+  .conf-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--yellow);
+    border: 1.5px solid #a68f00;
+    padding: 4px 11px;
+  }
+
+  nav { background: var(--green-mid); border-bottom: 1px solid var(--green-dim); }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    gap: 0;
+  }
+
+  .tab-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8aaa6a;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 12px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .tab-btn:hover { color: #f5f5f0; }
+  .tab-btn.active { color: var(--yellow); border-bottom-color: var(--yellow); }
+
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+  }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .overview-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  .hero-cell { background: white; padding: 22px 26px; }
+  .hero-cell.dark { background: var(--green-dim); color: #f5f5f0; grid-column: span 2; }
+
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 7px;
+  }
+
+  .hero-cell.dark .hero-label { color: #8aaa6a; }
+
+  .hero-value {
+    font-family: 'Crimson Pro', serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--green);
+  }
+
+  .hero-cell.dark .hero-value {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: #b0c8a0;
+    line-height: 1.75;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  .stat-card { background: white; padding: 20px 22px; border-top: 3px solid var(--green); }
+  .stat-card.yellow-top { border-top-color: var(--yellow); }
+  .stat-card.red-top { border-top-color: var(--red-warn); }
+
+  .stat-number {
+    font-family: 'Crimson Pro', serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+
+  .stat-card.yellow-top .stat-number { color: #a68f00; }
+  .stat-card.red-top .stat-number { color: var(--red-warn); }
+
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .stat-desc {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 7px;
+    line-height: 1.55;
+  }
+
+  footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 32px 40px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 700px) {
+    main, footer { padding-left: 18px; padding-right: 18px; }
+    .overview-hero, .stat-grid { grid-template-columns: 1fr; }
+    .hero-cell.dark { grid-column: span 1; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-flag-bar">
+    <div class="flag-green"></div>
+    <div class="flag-yellow"></div>
+    <div class="flag-white"></div>
+  </div>
+  <div class="header-inner">
+    <div class="header-left">
+      <div style="font-size: 22px;">🇻🇦</div>
+      <div>
+        <div class="header-title">Republic of Valdoria</div>
+        <div class="header-sub">FENNLAND FORUM · EMERGENCY SPECIAL SESSION · UNGA/SEP/FF/2024/001</div>
+      </div>
+    </div>
+    <div class="conf-badge">CONFIDENTIAL · EYES ONLY</div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+    <button class="tab-btn" onclick="showTab('crisis')">Crisis</button>
+  </div>
+</nav>
+
+<main>
+  <section class="section active" id="overview">
+    <div class="overview-hero">
+      <div class="hero-cell">
+        <div class="hero-label">State</div>
+        <div class="hero-value">Republic of Valdoria</div>
+      </div>
+      <div class="hero-cell">
+        <div class="hero-label">Role</div>
+        <div class="hero-value" style="font-size:14px; color:var(--red-warn);">Aggrieved State · Victim</div>
+      </div>
+      <div class="hero-cell">
+        <div class="hero-label">Population</div>
+        <div class="hero-value">4.2 Million</div>
+      </div>
+      <div class="hero-cell dark">
+        <div class="hero-label">Classification Notice</div>
+        <div class="hero-value">Classified intelligence and strategic instructions. Eyes only.</div>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card red-top">
+        <div class="stat-number">40,000</div>
+        <div class="stat-label">Civilians Displaced</div>
+      </div>
+      <div class="stat-card red-top">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Officers Killed</div>
+      </div>
+      <div class="stat-card yellow-top">
+        <div class="stat-number">$18M</div>
+        <div class="stat-label">Monthly Revenue Lost</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="crisis">
+    <h2>Crisis Assessment</h2>
+    <p>Systematic proxy campaign destabilisation directly linked to state-level funding from Lapland.</p>
+  </section>
+</main>
+
+<footer>
+  <div>UNGA/SEP/FF/2024/001 · FENNLAND FORUM</div>
+  <div>CONFIDENTIAL · EYES ONLY</div>
+</footer>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+</script>
+</body>
+</html>
