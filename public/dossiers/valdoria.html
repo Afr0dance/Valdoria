@@ -7,130 +7,78 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
 <style>
-  :root{--green:#2d6a2d;--green-mid:#1f4f1f;--green-dim:#163416;--green-light:#4a8c3f;--yellow:#d4b800;--yellow-dim:#a68f00;--white-flag:#f5f5f0;--cream:#f2f4ee;--silver:#e4e8dc;--border:#c8d0b8;--muted:#6a7a5a;--ink:#1a2010;--ink-mid:#2e3d22;--red-warn:#c0392b;--red-light:#fdf0ee}
+  :root{--green:#2d6a2d;--green-mid:#1f4f1f;--green-dim:#163416;--yellow:#d4b800;--yellow-dim:#a68f00;--white-flag:#f5f5f0;--cream:#f2f4ee;--silver:#e4e8dc;--border:#c8d0b8;--muted:#6a7a5a;--ink:#1a2010;--ink-mid:#2e3d22;--red-warn:#c0392b}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--cream);color:var(--ink);font-family:'Nunito Sans',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
   .watermark{position:fixed;top:80px;left:-20px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.22em;color:var(--green);border:2px solid var(--green);padding:5px 13px;transform:rotate(8deg);opacity:0.08;pointer-events:none;z-index:0;white-space:nowrap}
   header{background:var(--green-dim);color:var(--white-flag);position:sticky;top:0;z-index:100}
-  .header-flag-bar{display:flex;height:5px}
-  .flag-green{flex:1;background:var(--green)}.flag-yellow{flex:1;background:var(--yellow)}.flag-white{flex:1;background:var(--white-flag)}
-  .header-inner{max-width:1100px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-  .header-left{display:flex;align-items:center;gap:14px}
-  .flag-swatch{width:38px;height:26px;border-radius:2px;overflow:hidden;flex-shrink:0;display:flex;flex-direction:column}
-  .flag-swatch div{flex:1}.swatch-g{background:var(--green)}.swatch-y{background:var(--yellow)}.swatch-w{background:var(--white-flag)}
-  .header-title{font-family:'Crimson Pro',serif;font-size:19px;font-weight:700;letter-spacing:0.01em}
-  .header-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:#8aaa6a;letter-spacing:0.14em;margin-top:3px}
-  .conf-badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.18em;color:var(--yellow);border:1.5px solid var(--yellow-dim);padding:4px 11px;flex-shrink:0}
+  .header-inner{max-width:1100px;margin:0 auto;padding:20px 32px;display:flex;flex-direction:column;align-items:center;gap:16px}
+  .header-logos{display:flex;align-items:center;justify-content:center;gap:32px}
+  .un-logo{width:100px;height:auto}
+  .flag-logo{width:120px;height:80px;object-fit:contain}
+  .header-title{font-family:'Crimson Pro',serif;font-size:28px;font-weight:700;letter-spacing:0.01em;text-align:center}
+  .header-sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:#8aaa6a;letter-spacing:0.14em;margin-top:2px;text-align:center}
+  .conf-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.18em;color:var(--yellow);border:1.5px solid var(--yellow-dim);padding:5px 12px}
   nav{background:var(--green-mid);border-bottom:1px solid var(--green-dim)}
   .nav-inner{max-width:1100px;margin:0 auto;padding:0 32px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;align-items:center}
   .nav-inner::-webkit-scrollbar{display:none}
-  .tab-btn{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#8aaa6a;background:none;border:none;border-bottom:2px solid transparent;padding:12px 16px;cursor:pointer;white-space:nowrap;transition:color 0.15s,border-color 0.15s}
+  .tab-btn{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#8aaa6a;background:none;border:none;border-bottom:2px solid transparent;padding:12px 14px;cursor:pointer;white-space:nowrap;transition:color 0.15s,border-color 0.15s}
   .tab-btn:hover{color:var(--white-flag)}.tab-btn.active{color:var(--yellow);border-bottom-color:var(--yellow)}
-  .view-toggle{margin-left:auto;flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#8aaa6a;background:none;border:1px solid #2a4a2a;padding:6px 14px;cursor:pointer;white-space:nowrap;align-self:center;transition:color 0.15s,border-color 0.15s}
+  .view-toggle{margin-left:auto;flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#8aaa6a;background:none;border:1px solid #2a4a2a;padding:6px 12px;cursor:pointer;white-space:nowrap;align-self:center;transition:color 0.15s,border-color 0.15s}
   .view-toggle:hover{color:var(--white-flag);border-color:#8aaa6a}.view-toggle.doc-active{color:var(--yellow);border-color:var(--yellow-dim)}
   body.doc-mode .tab-btn{opacity:0.4;pointer-events:none}body.doc-mode .section{display:block!important}
-  .doc-divider{display:none;align-items:center;gap:16px;margin:52px 0 38px}body.doc-mode .doc-divider{display:flex}
-  .doc-divider-line{flex:1;height:1px;background:var(--border)}.doc-divider-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.2em;color:var(--muted);white-space:nowrap}
-  main{max-width:1100px;margin:0 auto;padding:40px 32px 80px}
+  main{max-width:1100px;margin:0 auto;padding:32px 32px 80px}
   .section{display:none}.section.active{display:block}
   .overview-hero{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border:1px solid var(--border);margin-bottom:28px}
-  .hero-cell{background:#fff;padding:22px 26px}.hero-cell.dark{background:var(--green-dim);color:var(--white-flag);grid-column:span 2}
+  .hero-cell{background:#fff;padding:20px 24px}.hero-cell.dark{background:var(--green-dim);color:var(--white-flag);grid-column:span 2}
   .hero-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
   .hero-cell.dark .hero-label{color:#8aaa6a}
-  .hero-value{font-family:'Crimson Pro',serif;font-size:20px;font-weight:700;line-height:1.25;color:var(--green)}
+  .hero-value{font-family:'Crimson Pro',serif;font-size:18px;font-weight:700;line-height:1.25;color:var(--green)}
   .hero-cell.dark .hero-value{font-family:'Nunito Sans',sans-serif;font-size:13px;font-weight:300;color:#b0c8a0;line-height:1.75}
   .accent{color:var(--red-warn)}.yellow{color:var(--yellow-dim)}
   .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border:1px solid var(--border);margin-bottom:28px}
-  .stat-card{background:#fff;padding:20px 22px;border-top:3px solid var(--green)}
-  .stat-card.yellow-top{border-top-color:var(--yellow)}.stat-card.red-top{border-top-color:var(--red-warn)}
-  .stat-number{font-family:'Crimson Pro',serif;font-size:34px;font-weight:700;color:var(--green);line-height:1;margin-bottom:5px}
-  .stat-card.yellow-top .stat-number{color:var(--yellow-dim)}.stat-card.red-top .stat-number{color:var(--red-warn)}
+  .stat-card{background:#fff;padding:18px 20px;border-top:3px solid var(--green)}
+  .stat-card.red-top{border-top-color:var(--red-warn)}
+  .stat-number{font-family:'Crimson Pro',serif;font-size:32px;font-weight:700;color:var(--green);line-height:1;margin-bottom:5px}
+  .stat-card.red-top .stat-number{color:var(--red-warn)}
   .stat-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted)}
   .stat-desc{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.55}
-  .sec-header{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+  .sec-header{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border)}
   .sec-number{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--yellow-dim);letter-spacing:0.1em}
-  .sec-title{font-family:'Crimson Pro',serif;font-size:26px;font-weight:700;color:var(--green-dim)}
-  .card{background:#fff;border:1px solid var(--border);border-left:3px solid var(--green);padding:22px 24px;margin-bottom:14px}
-  .card.yellow-accent{border-left-color:var(--yellow)}.card.red-accent{border-left-color:var(--red-warn);background:var(--red-light)}
+  .sec-title{font-family:'Crimson Pro',serif;font-size:22px;font-weight:700;color:var(--green-dim)}
+  .card{background:#fff;border:1px solid var(--border);border-left:3px solid var(--green);padding:20px 22px;margin-bottom:12px}
+  .card.yellow-accent{border-left-color:var(--yellow)}.card.red-accent{border-left-color:var(--red-warn)}
   .card-title{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--green-mid);margin-bottom:10px}
   .card.red-accent .card-title{color:var(--red-warn)}
-  .card-body{font-size:14px;line-height:1.78;color:var(--ink-mid)}.card-body p+p{margin-top:10px}
-  .province-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
-  .province-card{background:#fff;border:1px solid var(--border);border-top:3px solid var(--green);padding:18px 20px}
-  .province-name{font-family:'Crimson Pro',serif;font-size:17px;font-weight:700;color:var(--green-dim);margin-bottom:3px}
-  .province-sub{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.12em;color:var(--muted);margin-bottom:12px}
-  .province-stat{font-family:'Crimson Pro',serif;font-size:22px;font-weight:700;color:var(--red-warn);margin-bottom:2px}
-  .province-stat-label{font-size:11px;color:var(--muted);margin-bottom:10px}
-  .province-body{font-size:12px;line-height:1.65;color:var(--ink-mid)}
-  .militia-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--border);margin-bottom:14px}
-  .militia-table th{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--white-flag);background:var(--green-mid);padding:12px 16px;text-align:left;font-weight:500}
-  .militia-table td{padding:12px 16px;font-size:13px;line-height:1.6;border-bottom:1px solid var(--silver);vertical-align:top;color:var(--ink-mid)}
-  .militia-table tr:last-child td{border-bottom:none}.militia-table tr:hover td{background:var(--cream)}
-  .timeline{position:relative;padding-left:30px}
-  .timeline::before{content:'';position:absolute;left:8px;top:10px;bottom:0;width:1px;background:var(--border)}
-  .tl-item{position:relative;margin-bottom:30px}
-  .tl-item::before{content:'';position:absolute;left:-26px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--green);border:2px solid var(--cream);outline:1px solid var(--green)}
-  .tl-item.critical::before{background:var(--red-warn);outline-color:var(--red-warn)}
-  .tl-date{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.12em;color:var(--green);margin-bottom:4px}
-  .tl-item.critical .tl-date{color:var(--red-warn)}
-  .tl-event{font-family:'Crimson Pro',serif;font-size:15px;font-weight:700;margin-bottom:6px;color:var(--ink)}
-  .tl-detail{font-size:13px;line-height:1.72;color:#3a4a2a}
-  .grievance-card{background:#fff;border:1px solid var(--border);padding:20px 24px;margin-bottom:12px;display:flex;gap:20px;align-items:flex-start}
-  .grievance-num{font-family:'Crimson Pro',serif;font-size:36px;font-weight:700;color:var(--green-light);line-height:1;flex-shrink:0;width:28px;opacity:0.4}
-  .grievance-content{flex:1}
+  .card-body{font-size:13px;line-height:1.7;color:var(--ink-mid)}.card-body p+p{margin-top:10px}
+  .grievance-card{background:#fff;border:1px solid var(--border);padding:18px 20px;margin-bottom:10px;border-left:3px solid var(--green)}
+  .grievance-num{font-family:'Crimson Pro',serif;font-size:28px;font-weight:700;color:var(--green);line-height:1;margin-bottom:8px}
   .grievance-title{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--green-mid);margin-bottom:8px}
-  .grievance-body{font-size:13.5px;line-height:1.75;color:var(--ink-mid)}
-  .option-split{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border:1px solid var(--border);margin-bottom:16px}
-  .option-a{background:#fff;padding:24px}.option-b{background:var(--green-dim);color:var(--white-flag);padding:24px}
-  .option-tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;padding:4px 10px;display:inline-block;margin-bottom:12px}
-  .option-tag.a{background:var(--green);color:#fff}.option-tag.b{background:var(--yellow);color:var(--green-dim)}
-  .option-heading{font-family:'Crimson Pro',serif;font-size:17px;font-weight:700;margin-bottom:10px;color:var(--green-dim)}
-  .option-b .option-heading{color:var(--white-flag)}.option-body{font-size:13px;line-height:1.75;color:var(--ink-mid)}
-  .option-b .option-body{color:#b0c8a0}
-  .warn-box{margin-top:14px;background:rgba(192,57,43,0.1);border-left:3px solid var(--red-warn);padding:10px 14px;font-size:12px;color:var(--red-warn);line-height:1.65;font-family:'JetBrains Mono',monospace;letter-spacing:0.02em}
-  .option-b .warn-box{background:rgba(192,57,43,0.15);color:#f5a0a0;border-color:#e07060}
-  .redline-card{background:var(--red-light);border:1px solid #e0c0bc;border-left:4px solid var(--red-warn);padding:18px 22px;margin-bottom:12px;display:flex;gap:16px;align-items:flex-start}
-  .redline-icon{font-size:18px;flex-shrink:0;margin-top:1px}
-  .redline-content{flex:1}
-  .redline-title{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red-warn);margin-bottom:7px}
-  .redline-body{font-size:13.5px;line-height:1.72;color:#5a1a14}
-  .priority-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--border)}
+  .grievance-body{font-size:12px;line-height:1.7;color:var(--ink-mid)}
+  .priority-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--border);margin-top:20px}
   .priority-table th{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--white-flag);background:var(--green-mid);padding:12px 16px;text-align:left;font-weight:500}
-  .priority-table td{padding:14px 16px;font-size:13px;line-height:1.6;border-bottom:1px solid var(--silver);vertical-align:top;color:var(--ink-mid)}
+  .priority-table td{padding:12px 16px;font-size:12px;line-height:1.5;border-bottom:1px solid var(--silver);vertical-align:top;color:var(--ink-mid)}
   .priority-table tr:last-child td{border-bottom:none}.priority-table tr:hover td{background:var(--cream)}
-  .rank-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--green);width:30px}
-  .intel-box{background:var(--green-dim);color:#b0c8a0;border-left:3px solid var(--yellow-dim);padding:18px 22px;margin-bottom:16px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.7;letter-spacing:0.03em}
-  .intel-box strong{color:var(--yellow)}
-  .bullet-list{list-style:none;padding:0}
-  .bullet-list li{font-size:13px;line-height:1.72;color:var(--ink-mid);padding:8px 0 8px 20px;position:relative;border-bottom:1px solid var(--silver)}
-  .bullet-list li:last-child{border-bottom:none}
-  .bullet-list li::before{content:'→';position:absolute;left:0;color:var(--green-light);font-family:'JetBrains Mono',monospace;font-size:11px}
-  .alert{background:#1a0a08;color:#f5c0a8;border-left:3px solid var(--red-warn);padding:16px 20px;margin-bottom:18px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.65;letter-spacing:0.04em}
+  .rank-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--green);width:24px}
+  .alert{background:#1a0a08;color:#f5c0a8;border-left:3px solid var(--red-warn);padding:14px 18px;margin-bottom:18px;font-family:'JetBrains Mono',monospace;font-size:10px;line-height:1.6;letter-spacing:0.04em}
   footer{max-width:1100px;margin:0 auto;padding:20px 32px 40px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border)}
   .footer-text{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;color:var(--muted)}
   @media(max-width:700px){
-    main,footer{padding-left:16px;padding-right:16px;padding-top:24px}
-    .header-inner{padding:10px 16px;flex-wrap:wrap;gap:8px}
+    main,footer{padding-left:16px;padding-right:16px}
+    .header-inner{padding:14px 16px;gap:12px}
+    .header-logos{gap:16px}
+    .un-logo{width:70px}
+    .flag-logo{width:90px;height:60px}
+    .header-title{font-size:18px}
+    .header-sub{font-size:9px}
     .nav-inner{padding-left:0;padding-right:0}
-    .header-title{font-size:14px}
-    .header-sub{font-size:8px;letter-spacing:0.07em}
-    .conf-badge{font-size:8px;padding:3px 7px;letter-spacing:0.1em}
-    .tab-btn{font-size:9px;padding:10px 11px;letter-spacing:0.06em}
-    .view-toggle{font-size:8px;padding:5px 10px}
-    .overview-hero,.stat-grid,.province-grid,.option-split{grid-template-columns:1fr}
+    .tab-btn{font-size:8px;padding:10px 10px}
+    .view-toggle{font-size:7px;padding:5px 10px}
+    .overview-hero,.stat-grid{grid-template-columns:1fr}
     .hero-cell.dark{grid-column:span 1}
-    .grievance-card{flex-direction:column;gap:8px}
-    .stat-number{font-size:28px}
-    .hero-cell{padding:16px 18px}
-    .stat-card{padding:16px 18px}
-    .sec-title{font-size:20px}
-    .card{padding:16px 18px}
-    .province-card{padding:14px 16px}
-    .redline-card{padding:14px 16px;gap:10px}
-    .militia-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
-    .priority-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
-    .priority-table th,.priority-table td,.militia-table th,.militia-table td{padding:10px 12px;font-size:12px}
-    .footer-text{font-size:8px;letter-spacing:0.08em}
+    .stat-number{font-size:24px}
+    .sec-title{font-size:18px}
+    .priority-table th,.priority-table td{padding:10px 12px;font-size:11px}
     footer{flex-direction:column;gap:6px;align-items:flex-start}
     .watermark{display:none}
   }
@@ -139,135 +87,91 @@
 <body>
 <div class="watermark">CONFIDENTIAL · DELEGATION EYES ONLY</div>
 <header>
-  <div class="header-flag-bar"><div class="flag-green"></div><div class="flag-yellow"></div><div class="flag-white"></div></div>
   <div class="header-inner">
-    <div class="header-left">
-      <div class="flag-swatch"><div class="swatch-g"></div><div class="swatch-y"></div><div class="swatch-w"></div></div>
-      <div>
-        <div class="header-title">Republic of Valdoria</div>
-        <div class="header-sub">FENNLAND FORUM · EMERGENCY SPECIAL SESSION · UNGA/SEP/FF/2024/001</div>
-      </div>
+    <div class="header-logos">
+      <svg class="un-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="45" fill="#ffffff" opacity="0.15"/>
+        <text x="50" y="55" font-size="20" font-weight="bold" text-anchor="middle" fill="#ffffff">UN</text>
+      </svg>
+      <svg class="flag-logo" viewBox="0 0 960 640" xmlns="http://www.w3.org/2000/svg">
+        <rect width="320" height="640" fill="#2d6a2d"/>
+        <rect x="320" width="320" height="640" fill="#d4b800"/>
+        <rect x="640" width="320" height="640" fill="#f5f5f0"/>
+      </svg>
     </div>
-    <div class="conf-badge">CONFIDENTIAL · EYES ONLY</div>
+    <div>
+      <div class="header-title">REPUBLIC OF VALDORIA</div>
+      <div class="header-sub">DELEGATION DOSSIER · FENNLAND FORUM · EMERGENCY SPECIAL SESSION</div>
+      <div style="text-align:center;margin-top:8px;"><span class="conf-badge">CONFIDENTIAL · DELEGATION EYES ONLY</span></div>
+    </div>
   </div>
 </header>
 <nav>
   <div class="nav-inner">
     <button class="tab-btn active" onclick="showTab('overview',event)">Overview</button>
     <button class="tab-btn" onclick="showTab('crisis',event)">Crisis Briefing</button>
-    <button class="tab-btn" onclick="showTab('timeline',event)">Timeline</button>
     <button class="tab-btn" onclick="showTab('grievances',event)">Grievances</button>
-    <button class="tab-btn" onclick="showTab('position',event)">Position & Options</button>
+    <button class="tab-btn" onclick="showTab('position',event)">Position</button>
     <button class="tab-btn" onclick="showTab('mandate',event)">Mandate & Red Lines</button>
-    <button class="tab-btn" onclick="showTab('intelligence',event)">Secret Intelligence</button>
-    <button class="view-toggle" id="viewToggle" onclick="toggleDocMode()">⊞ Full Document</button>
+    <button class="view-toggle" id="viewToggle" onclick="toggleDocMode()">⊞ Full</button>
   </div>
 </nav>
 <main>
   <section class="section active" id="overview">
     <div class="overview-hero">
       <div class="hero-cell"><div class="hero-label">State</div><div class="hero-value">Republic of Valdoria</div></div>
-      <div class="hero-cell"><div class="hero-label">Status</div><div class="hero-value" style="font-size:14px;">Sovereign State · UN Permanent Observer · <span class="yellow">Central Europe</span></div></div>
-      <div class="hero-cell"><div class="hero-label">Role in Forum</div><div class="hero-value" style="font-size:14px;color:var(--red-warn);">Aggrieved State — Primary Victim of Proxy Conflict</div></div>
+      <div class="hero-cell"><div class="hero-label">Status</div><div class="hero-value" style="font-size:14px;">Sovereign State · UN Observer · <span class="yellow">Central Europe</span></div></div>
       <div class="hero-cell"><div class="hero-label">Population</div><div class="hero-value">4.2 Million</div></div>
-      <div class="hero-cell dark"><div class="hero-label">Classification Notice</div><div class="hero-value">This document contains classified intelligence and strategic instructions. Do not share with other delegations or observers. This forum is Valdoria's last diplomatic option before a full security breakdown.</div></div>
+      <div class="hero-cell"><div class="hero-label">Role</div><div class="hero-value" style="font-size:14px;color:var(--red-warn);">Aggrieved State — Primary Victim</div></div>
+      <div class="hero-cell dark"><div class="hero-label">Classification</div><div class="hero-value">This document contains classified intelligence and strategic instructions. Do not share with other delegations or observers. This forum is Valdoria's last diplomatic option.</div></div>
     </div>
     <div class="stat-grid">
-      <div class="stat-card red-top"><div class="stat-number">40,000</div><div class="stat-label">Civilians Displaced</div><div class="stat-desc">Across Korra, Velsk, and Dravan provinces — many for over a year</div></div>
-      <div class="stat-card red-top"><div class="stat-number">4</div><div class="stat-label">Officers Killed</div><div class="stat-desc">Petro Balan, Dmytro Serko, Vasyl Marko, Olena Yuts — Velsk ambush, Dec 2023</div></div>
-      <div class="stat-card yellow-top"><div class="stat-number">$18M</div><div class="stat-label">Monthly Revenue Lost</div><div class="stat-desc">Transit corridor disruption since November — USD 2.1B annual trade at risk</div></div>
-      <div class="stat-card"><div class="stat-number">340km</div><div class="stat-label">Shared Border with Lapland</div><div class="stat-desc">12 border villages affected by militia activity across 3 provinces</div></div>
-      <div class="stat-card yellow-top"><div class="stat-number">3</div><div class="stat-label">Diplomatic Notes Sent</div><div class="stat-desc">All ignored or returned — zero responses received from Lapland</div></div>
-      <div class="stat-card red-top"><div class="stat-number">$14M</div><div class="stat-label">Intercepted Militia Funding</div><div class="stat-desc">Two tranches routed through shell companies in China's special economic zone</div></div>
+      <div class="stat-card red-top"><div class="stat-number">40,000</div><div class="stat-label">Civilians Displaced</div><div class="stat-desc">Across Korra, Velsk, Dravan provinces</div></div>
+      <div class="stat-card red-top"><div class="stat-number">4</div><div class="stat-label">Officers Killed</div><div class="stat-desc">Velsk ambush, December 2023</div></div>
+      <div class="stat-card red-top"><div class="stat-number">$18M</div><div class="stat-label">Monthly Revenue Lost</div><div class="stat-desc">Transit corridor disruption</div></div>
     </div>
-    <div class="alert">⚠ POLITICAL SURVIVAL — Prime Minister Voronov faces a coalition government where two minor parties threaten to withdraw support if the crisis is not resolved within 90 days. His political survival is directly tied to the outcome of this forum.</div>
+    <div class="alert">⚠ POLITICAL SURVIVAL — PM Voronov faces coalition where two parties threaten withdrawal if crisis not resolved in 90 days. Political survival tied to forum outcome.</div>
   </section>
 
-  <div class="doc-divider"><div class="doc-divider-line"></div><div class="doc-divider-label">§ 01 · CRISIS BRIEFING</div><div class="doc-divider-line"></div></div>
   <section class="section" id="crisis">
-    <div class="sec-header"><span class="sec-number">§ 01</span><h2 class="sec-title">The Crisis — Full Situation Briefing</h2></div>
-    <div class="card" style="margin-bottom:24px;"><div class="card-title">Assessment</div><div class="card-body"><p>What began as isolated militia raids has escalated into a <strong>systematic proxy campaign</strong> conclusively linked by Valdoria's intelligence services to state-level funding from Lapland. The scale, coordination, and resourcing of the militia activity is inconsistent with independent non-state actors — this is an organised operation.</p></div></div>
-    <div class="province-grid">
-      <div class="province-card"><div class="province-name">Korra Province</div><div class="province-sub">NORTHERN BORDER · POP. 180,000</div><div class="province-stat">14,000</div><div class="province-stat-label">civilians displaced</div><div class="province-body">Heaviest militia activity. Three villages — Ustava, Merin, and Polach — completely evacuated. Militia groups operate freely at night. Regional capital Korrava housing evacuees at 340% capacity.</div></div>
-      <div class="province-card"><div class="province-name">Velsk Province</div><div class="province-sub">NORTHEAST BORDER · POP. 220,000</div><div class="province-stat">18,000</div><div class="province-stat-label">civilians displaced</div><div class="province-body">Most economically significant crossing disrupted. Four border officers killed in the December ambush. The Velsk-Lapland corridor, Valdoria's most critical, now compromised.</div></div>
-      <div class="province-card"><div class="province-name">Dravan Province</div><div class="province-sub">NORTHWEST BORDER · POP. 95,000</div><div class="province-stat">8,000</div><div class="province-stat-label">civilians displaced</div><div class="province-body">Lowest intensity but growing. Credible intelligence suggests a third militia cell assembling in Lapland-adjacent forest regions. State of emergency declared.</div></div>
-    </div>
-    <table class="militia-table">
-      <thead><tr><th>Group</th><th>Area of Operation</th><th>Public Claim</th><th>Intelligence Assessment</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Korra Liberation Front (KLF)</strong></td><td>Korra Province</td><td>Rights of ethnic Laplandic minorities</td><td>Leadership traced to Lapland's Interior Ministry operatives</td></tr>
-        <tr><td><strong>Northern Shield Brigade (NSB)</strong></td><td>Velsk Province</td><td>Rights of ethnic Laplandic minorities</td><td>Conducted Velsk ambush; weapons consistent with state-sourced supply chains</td></tr>
-        <tr><td><strong>Velsk Sovereignty Movement (VSM)</strong></td><td>Velsk / Dravan</td><td>Rights of ethnic Laplandic minorities</td><td>No significant recruitment from actual Laplandic-Valdorian communities</td></tr>
-      </tbody>
-    </table>
-    <div class="card yellow-accent"><div class="card-title">The Ethnic Cover Story</div><div class="card-body"><p>All three groups publicly claim to fight for ethnic Laplandic minorities within Valdoria — a community of approximately 120,000 people who have lived in northern Valdoria for generations with full citizenship rights.</p><p>Valdoria's intelligence assessment: <strong>this is a cover story.</strong> Weapons recovered from militia operations include military-grade equipment consistent with state-sourced supply chains running through China's special economic zone in northern Lapland.</p></div></div>
-  </section>
-
-  <div class="doc-divider"><div class="doc-divider-line"></div><div class="doc-divider-label">§ 02 · CRISIS TIMELINE</div><div class="doc-divider-line"></div></div>
-  <section class="section" id="timeline">
-    <div class="sec-header"><span class="sec-number">§ 02</span><h2 class="sec-title">Crisis Timeline</h2></div>
-    <div class="timeline">
-      <div class="tl-item"><div class="tl-date">Mar 2022</div><div class="tl-event">Lapland's Nationalist Government Elected</div><div class="tl-detail">Prime Minister Mäkinen wins on a platform referencing 'protection of Laplandic communities abroad' — widely interpreted as a reference to ethnic minorities in Valdoria's northern provinces.</div></div>
-      <div class="tl-item"><div class="tl-date">Aug 2022</div><div class="tl-event">China Expands Mineral Agreement with Lapland</div><div class="tl-detail">China renews and expands rare earth mineral contracts covering 40% of northern Lapland. Agreement includes a bilateral non-interference clause. Valdoria files a formal note of concern — ignored.</div></div>
-      <div class="tl-item"><div class="tl-date">Jan 2023</div><div class="tl-event">First Militia Incidents — Korra Province</div><div class="tl-detail">Small-scale raids on two border villages. Initially characterised as criminal activity. 400 civilians relocated as a precaution.</div></div>
-      <div class="tl-item"><div class="tl-date">May 2023</div><div class="tl-event">KLF and NSB Identified — Assessment Upgraded</div><div class="tl-detail">Intelligence services identify two distinct militia groups. Weapons analysis traces supply chains to Lapland. Valdoria upgrades its assessment to organised proxy activity. 6,000 civilians displaced.</div></div>
-      <div class="tl-item critical"><div class="tl-date">Sep 2023</div><div class="tl-event">Deputy Minister Halonen Authorises First Funding Tranche</div><div class="tl-detail">USD 8 million routed through shell companies in China's special economic zone. Valdoria's signals intelligence intercepts partial communications referencing the transfer — code names only.</div></div>
-      <div class="tl-item"><div class="tl-date">Oct 2023</div><div class="tl-event">First Formal Diplomatic Note to Lapland</div><div class="tl-detail">Foreign Minister Kastelova submits Diplomatic Note 001. No response received within the 30-day window.</div></div>
-      <div class="tl-item critical"><div class="tl-date">Dec 2023</div><div class="tl-event">Velsk Ambush — Four Officers Killed</div><div class="tl-detail">The deadliest incident to date. Officers <strong>Petro Balan, Dmytro Serko, Vasyl Marko, and Olena Yuts</strong> killed in a coordinated NSB ambush. Second funding tranche of USD 6 million intercepted. 20,000 civilians displaced total.</div></div>
-      <div class="tl-item"><div class="tl-date">Feb 2024</div><div class="tl-event">Second and Third Diplomatic Notes — Both Unanswered</div><div class="tl-detail">Diplomatic Note 002 (3 Feb) and Note 003 (22 Feb) submitted. Lapland returns Note 003 unopened, citing 'unsubstantiated allegations incompatible with diplomatic protocol.'</div></div>
-      <div class="tl-item"><div class="tl-date">Mar 2024</div><div class="tl-event">Fennland Forum Convened — Valdoria Accepts</div><div class="tl-detail">After exhausting all bilateral channels, Voronov accepts the forum invitation. 40,000 civilians now displaced. <strong>This forum is Valdoria's last diplomatic option before a full security breakdown.</strong></div></div>
+    <div class="sec-header"><span class="sec-number">§ 01</span><h2 class="sec-title">The Crisis — Full Situation</h2></div>
+    <div class="card"><div class="card-title">Assessment</div><div class="card-body">What began as isolated militia raids has escalated into systematic proxy campaign conclusively linked to state-level funding from Lapland. Scale, coordination, and resourcing is inconsistent with independent non-state actors — this is an organized operation.</div></div>
+    <div style="margin:16px 0;">
+      <div class="card" style="margin-bottom:10px;"><div class="card-title">Korra Province — Northern Border</div><div class="card-body"><strong>Population:</strong> 180,000 | <strong>Displaced:</strong> 14,000<br/>Heaviest militia activity. Three villages completely evacuated. Militia operate freely at night. Regional capital Korrava housing evacuees at 340% capacity.</div></div>
+      <div class="card" style="margin-bottom:10px;"><div class="card-title">Velsk Province — Northeast Border</div><div class="card-body"><strong>Population:</strong> 220,000 | <strong>Displaced:</strong> 18,000<br/>Most economically significant crossing disrupted. Four border officers killed in December ambush. Velsk-Lapland corridor now compromised.</div></div>
+      <div class="card"><div class="card-title">Dravan Province — Northwest Border</div><div class="card-body"><strong>Population:</strong> 95,000 | <strong>Displaced:</strong> 8,000<br/>Lowest intensity but growing. Credible intelligence suggests third militia cell assembling in Lapland-adjacent forest regions.</div></div>
     </div>
   </section>
 
-  <div class="doc-divider"><div class="doc-divider-line"></div><div class="doc-divider-label">§ 04 · CORE GRIEVANCES</div><div class="doc-divider-line"></div></div>
   <section class="section" id="grievances">
-    <div class="sec-header"><span class="sec-number">§ 04</span><h2 class="sec-title">Core Grievances — On the Record</h2></div>
-    <div class="card" style="margin-bottom:22px;"><div class="card-title">Scope</div><div class="card-body">These are the specific injuries Valdoria intends to raise formally in the General Speakers List and Open Floor. Each has an evidential basis and a specific demand attached to it.</div></div>
-    <div class="grievance-card"><div class="grievance-num">1</div><div class="grievance-content"><div class="grievance-title">Unanswered Diplomatic Communications</div><div class="grievance-body">Three formal diplomatic notes submitted over five months — all ignored or returned. Under the Vienna Convention on Diplomatic Relations, Lapland's failure to respond constitutes a serious breach of basic state-to-state obligations. <strong>Valdoria demands</strong> a formal acknowledgement and response to all three notes as a precondition to any substantive dialogue.</div></div></div>
-    <div class="grievance-card"><div class="grievance-num">2</div><div class="grievance-content"><div class="grievance-title">40,000 Civilians Displaced Without Remedy</div><div class="grievance-body">Forty thousand Valdorian citizens driven from their homes by militia activity directly linked to Lapland's state apparatus. Living in emergency facilities, many for over a year. No humanitarian assistance offered. <strong>Valdoria demands</strong> a jointly-funded humanitarian relief programme and a timeline for safe return.</div></div></div>
-    <div class="grievance-card"><div class="grievance-num">3</div><div class="grievance-content"><div class="grievance-title">Death of Four Border Police Officers</div><div class="grievance-body">The December ambush in Velsk Province killed Officers <strong>Petro Balan, Dmytro Serko, Vasyl Marko, and Olena Yuts.</strong> They have names. They had families. <strong>Valdoria demands</strong> that this forum acknowledge these deaths as a result of state-sponsored proxy violence.</div></div></div>
-    <div class="grievance-card"><div class="grievance-num">4</div><div class="grievance-content"><div class="grievance-title">Economic Sabotage of Transit Corridors</div><div class="grievance-body">Deliberate disruption of Valdoria's northern transit corridors has cost an estimated USD 18 million per month in lost revenue since November. Intelligence suggests militia targeting of the Velsk corridor was specifically instructed because it <em>competes with Lapland's own southern transit route.</em></div></div></div>
-    <div class="grievance-card"><div class="grievance-num">5</div><div class="grievance-content"><div class="grievance-title">China's Role as a Shield</div><div class="grievance-body">Valdoria is acutely aware that Lapland's impunity is underwritten by China's bilateral non-interference treaty with Lapland. This will be raised in private bilateral talks and signalled to the United States as a structural obstacle to any durable resolution.</div></div></div>
+    <div class="sec-header"><span class="sec-number">§ 02</span><h2 class="sec-title">Core Grievances</h2></div>
+    <div class="grievance-card"><div class="grievance-num">1</div><div class="grievance-title">Unanswered Diplomatic Communications</div><div class="grievance-body">Three formal diplomatic notes submitted over five months — all ignored or returned. Lapland's failure to respond is serious breach of Vienna Convention. Valdoria demands formal acknowledgement and response as precondition to dialogue.</div></div>
+    <div class="grievance-card"><div class="grievance-num">2</div><div class="grievance-title">40,000 Civilians Displaced Without Remedy</div><div class="grievance-body">Valdorian citizens driven from homes by militia directly linked to Lapland's state apparatus. Living in emergency facilities, many over a year. Valdoria demands jointly-funded humanitarian relief and safe return timeline.</div></div>
+    <div class="grievance-card"><div class="grievance-num">3</div><div class="grievance-title">Death of Four Border Officers</div><div class="grievance-body">December ambush killed Officers <strong>Petro Balan, Dmytro Serko, Vasyl Marko, Olena Yuts.</strong> They have names. They had families. Valdoria demands forum acknowledge these deaths as result of state-sponsored proxy violence.</div></div>
+    <div class="grievance-card"><div class="grievance-num">4</div><div class="grievance-title">Economic Sabotage of Transit Corridors</div><div class="grievance-body">Deliberate disruption of northern transit corridors cost USD 18 million monthly since November. Intelligence suggests militia targeting was specifically instructed because it competes with Lapland's own transit route.</div></div>
   </section>
 
-  <div class="doc-divider"><div class="doc-divider-line"></div><div class="doc-divider-label">§ 05 · POSITION & OPTIONS</div><div class="doc-divider-line"></div></div>
   <section class="section" id="position">
-    <div class="sec-header"><span class="sec-number">§ 05</span><h2 class="sec-title">Position & Expected Outcomes</h2></div>
-    <div class="card" style="margin-bottom:22px;"><div class="card-title">Valdoria's Standing Position</div><div class="card-body"><p>Valdoria stands as a sovereign state subjected to a systematic proxy campaign of destabilisation. Every available bilateral diplomatic remedy has been exhausted and met with silence, evasion, and contempt.</p><p style="margin-top:10px;"><strong>Invasion into Lapland is off the table.</strong> It would trigger international condemnation, invite sanctions, and risk a broader regional conflict Valdoria's armed forces cannot sustain beyond six weeks. <strong>Regime change in Lapland is not sought</strong> — only accountability.</p></div></div>
-    <div class="option-split">
-      <div class="option-a"><div class="option-tag a">Option A</div><div class="option-heading">Military Monitoring Force</div><div class="option-body"><p>A military joint force in collaboration with a humanitarian monitoring mission, effective for 30 days, securing Valdoria's borders and slowing escalation. Valdoria will accept new territories as a partial win and support a UN resolution letter. Prime Minister Voronov's coalition survives and grows.</p></div><div class="warn-box">⚠ WARNING — Highly unfavourable to China, Valdoria's largest trade partner. May trigger sanctions and escalation. A full-scale war backed by China and the USA would break out, throwing Valdoria into a 20-year conflict ending in stalemate with 40% civilian casualties and economic destruction.</div></div>
-      <div class="option-b"><div class="option-tag b">Option B</div><div class="option-heading">Ceasefire & Peace Deal</div><div class="option-body"><p>A co-collaborative peace treaty and joint task force cracking down on militias and terrorist groups at Valdoria's borders. In 20 years, successful negotiations lead Valdoria to discover rare earth deposits in its mountains — long-term economic prosperity.</p></div><div class="warn-box">⚠ WARNING — Highly unfavourable to Valdoria's domestic constituency. May trigger state secession. Prime Minister Vladimir's coalition may be overthrown by militia forces.</div></div>
-    </div>
+    <div class="sec-header"><span class="sec-number">§ 03</span><h2 class="sec-title">Position & Expected Outcomes</h2></div>
+    <div class="card" style="margin-bottom:16px;"><div class="card-title">Valdoria's Standing</div><div class="card-body"><p><strong>Invasion into Lapland is off the table.</strong> Would trigger international condemnation, sanctions, and broader regional conflict Valdoria cannot sustain beyond 6 weeks.</p><p style="margin-top:10px;"><strong>Regime change is not sought.</strong> Only accountability — formal acknowledgement that Lapland's conduct caused civilian displacement and officer deaths.</p></div></div>
+    <div class="card"><div class="card-title">Option A: Military Monitoring Force</div><div class="card-body">Joint military force with humanitarian monitoring for 30 days securing borders and slowing escalation. Valdoria accepts as partial win. PM coalition survives and grows.</div></div>
+    <div class="card red-accent"><div class="card-title">Option B: Ceasefire & Peace Deal</div><div class="card-body">Co-collaborative peace treaty and joint task force cracking down on militias at borders. In 20 years, successful negotiations lead Valdoria to discover rare earth deposits and economic prosperity.</div></div>
   </section>
 
-  <div class="doc-divider"><div class="doc-divider-line"></div><div class="doc-divider-label">§ 06 · MANDATE & RED LINES</div><div class="doc-divider-line"></div></div>
   <section class="section" id="mandate">
-    <div class="sec-header"><span class="sec-number">§ 06</span><h2 class="sec-title">Mandate & Red Lines</h2></div>
-    <div class="card" style="margin-bottom:8px;"><div class="card-title">Mandate 01 — Protect National Interest</div><div class="card-body">Valdoria's economic treaties with Lapland — covering energy, agriculture, and transit corridors worth USD 2.1 billion annually — must not be formally severed. Any resolution language triggering automatic treaty suspension is unacceptable. The crisis must be resolved in a way that preserves the structural framework for economic normalisation.</div></div>
-    <div class="card" style="margin-bottom:8px;"><div class="card-title">Mandate 02 — Secure a Resolution That Names the Cause</div><div class="card-body">The agreement must acknowledge that the displacement of Valdorian civilians is a direct consequence of armed militia activity. Valdoria will accept non-binding language on intervention. It will <strong>not</strong> accept language that is silent on causation.</div></div>
-    <div class="card yellow-accent" style="margin-bottom:24px;"><div class="card-title">Mandate 03 — Build the Coalition: United States First</div><div class="card-body"><p>The USA needs a signed outcome more than anyone. Give the United States flexibility on monitoring language in exchange for the USA holding the line on causation language in the resolution.</p><p style="margin-top:10px;"><strong>China is not a target for persuasion.</strong> Lapland is a secondary target — if their Foreign Minister shows signs of fracture, exploit it immediately through Kastelova in the bilateral space.</p></div></div>
-    <div class="redline-card"><div class="redline-icon">⛔</div><div class="redline-content"><div class="redline-title">Red Line 1 — No Resolution Omitting Displaced Civilians</div><div class="redline-body">Any resolution failing to acknowledge the 40,000 displaced civilians as a central fact of the crisis is unacceptable. Valdoria will vote <strong>Against</strong>. This is the absolute floor below which no deal can be made.</div></div></div>
-    <div class="redline-card"><div class="redline-icon">⛔</div><div class="redline-content"><div class="redline-title">Red Line 2 — No Resolution Exonerating Lapland</div><div class="redline-body">If the resolution characterises the situation as a mutual border dispute or implies equal responsibility, Valdoria will not sign. The resolution must at minimum be neutral on causation — it cannot actively reframe Valdoria as a co-contributor.</div></div></div>
-    <div class="redline-card"><div class="redline-icon">⛔</div><div class="redline-content"><div class="redline-title">Red Line 3 — No Bilateral Framework Brokered Exclusively by China</div><div class="redline-body">Valdoria will not enter bilateral dialogue with Lapland in which China is the sole mediating party. China's economic interests in Lapland make it structurally incapable of neutral mediation. The mediating party must be the United States, the UN, or a jointly agreed neutral.</div></div></div>
-    <div class="redline-card"><div class="redline-icon">⛔</div><div class="redline-content"><div class="redline-title">Red Line 5 — Valdoria Does Not Walk Out</div><div class="redline-body">No matter how frustrated, no matter how provocative Lapland's denials or China's procedural tactics — Valdoria does not walk out. Walking out hands the moral victory to Lapland and allows them to characterise Valdoria as unwilling to engage.</div></div></div>
-    <table class="priority-table" style="margin-top:24px;">
+    <div class="sec-header"><span class="sec-number">§ 04</span><h2 class="sec-title">Mandate & Red Lines</h2></div>
+    <div class="card" style="margin-bottom:12px;"><div class="card-title">Mandate 01</div><div class="card-body">Valdoria's economic treaties with Lapland (USD 2.1B annually) must not be formally severed. Resolution must preserve framework for economic normalization once proxy campaign ceases.</div></div>
+    <div class="card" style="margin-bottom:12px;"><div class="card-title">Mandate 02</div><div class="card-body">Resolution must acknowledge civilian displacement is direct consequence of armed militia activity. Valdoria accepts non-binding intervention language but will not accept silence on causation.</div></div>
+    <div class="card yellow-accent"><div class="card-title">Mandate 03</div><div class="card-body"><strong>Build coalition with United States first.</strong> USA needs signed outcome more than anyone. Give USA flexibility on monitoring in exchange for USA holding line on causation language.</div></div>
+    <table class="priority-table">
       <thead><tr><th>Priority</th><th>Goal</th><th>Strategic Logic</th></tr></thead>
       <tbody>
-        <tr><td><span class="rank-badge">1st</span></td><td><strong>Causation language</strong></td><td>Resolution must acknowledge that militia activity linked to Lapland caused the civilian displacement. A resolution silent on causation is a whitewash — Valdoria votes Against.</td></tr>
-        <tr><td><span class="rank-badge">2nd</span></td><td><strong>Displacement acknowledged</strong></td><td>The 40,000 displaced civilians named as a central fact of the crisis with compensation proposed for damages caused.</td></tr>
-        <tr><td><span class="rank-badge">3rd</span></td><td><strong>Monitoring mission or Peace Deal</strong></td><td>Either a military joint force with humanitarian monitoring, or a co-collaborative ceasefire and task force to crack down on militias at the border.</td></tr>
-        <tr><td><span class="rank-badge">4th</span></td><td><strong>China excluded as sole mediator</strong></td><td>Any bilateral framework must involve the USA, the UN, or a jointly agreed neutral — not China alone.</td></tr>
+        <tr><td><span class="rank-badge">1st</span></td><td><strong>Causation language</strong></td><td>Resolution must acknowledge militia activity linked to Lapland caused displacement.</td></tr>
+        <tr><td><span class="rank-badge">2nd</span></td><td><strong>Displacement acknowledged</strong></td><td>40,000 civilians named as central fact with compensation proposed.</td></tr>
+        <tr><td><span class="rank-badge">3rd</span></td><td><strong>Monitoring or Peace Deal</strong></td><td>Either military force or ceasefire with joint task force to crack down on militias.</td></tr>
+        <tr><td><span class="rank-badge">4th</span></td><td><strong>China not sole mediator</strong></td><td>Bilateral framework must involve USA, UN, or jointly agreed neutral.</td></tr>
       </tbody>
     </table>
-  </section>
-
-  <div class="doc-divider"><div class="doc-divider-line"></div><div class="doc-divider-label">§ 10 · SECRET INTELLIGENCE</div><div class="doc-divider-line"></div></div>
-  <section class="section" id="intelligence">
-    <div class="sec-header"><span class="sec-number">§ 10</span><h2 class="sec-title">Secret Intelligence — Eyes Only</h2></div>
-    <div class="intel-box">⬛ This section is known only to the Valdoria delegation. It must not be shared with any other group, the facilitator, or the UN panel.</div>
-    <div class="card yellow-accent" style="margin-bottom:14px;"><div class="card-title">The Intercept — Classified Signals Intelligence</div><div class="card-body"><p>Valdoria's signals intelligence unit has intercepted partial communications between officials in Lapland's Interior Ministry referencing the authorisation of two funding tranches to militia networks operating inside Valdoria's border provinces. The intercepts reference code names, not Deputy Minister Halonen by name.</p><p style="margin-top:10px;"><strong>The evidence is credible but not airtight.</strong></p><p style="margin-top:10px;">Total intercepted transfers: <strong>USD 14 million</strong>, routed through shell companies in China's special economic zone in northern Lapland.</p></div></div>
-    <div class="card red-accent"><div class="card-title">Decision Framework — When to Reveal</div><div class="card-body"><ul class="bullet-list"><li><strong>If the resolution looks like it will pass with Lapland named as responsible</strong> — hold the intelligence. It is not needed.</li><li><strong>If the resolution is being hollowed out by China's amendments and Lapland looks like they will walk away clean</strong> — reveal it. This is the last available lever.</li><li><strong>Only Prime Minister Voronov may authorise disclosure.</strong> Col. Harken advises. No one else decides.</li></ul></div></div>
-    <div class="alert">⚠ LAST RESORT — The intercept is Valdoria's only covert leverage. Deploying it prematurely eliminates the element of surprise. Hold until the forum is on the verge of producing a resolution that exonerates Lapland entirely.</div>
   </section>
 </main>
 
@@ -290,7 +194,7 @@
     const toggle = document.getElementById('viewToggle');
     document.body.classList.toggle('doc-mode', docMode);
     toggle.classList.toggle('doc-active', docMode);
-    toggle.textContent = docMode ? '↩ Tab View' : '⊞ Full Document';
+    toggle.textContent = docMode ? '↩ Tabs' : '⊞ Full';
     if (!docMode) {
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
       document.getElementById('overview').classList.add('active');
